@@ -28,6 +28,12 @@ class UserConnection():
         with self.conn.cursor() as cur:
             cur.execute(""" DELETE FROM "user" WHERE id = %s """,(id,))
             self.conn.commit()
+            
+    def update(self,data):
+        with self.conn.cursor() as cur:
+            cur.execute("""UPDATE "user" SET name = %(name)s, phone = %(phone)s WHERE id = %(id)s""", data)
 
+        self.conn.commit()
+        
     def __self__(self):
         self.conn.close()
